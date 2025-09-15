@@ -37,11 +37,11 @@ import java.util.List;
  * ✅ À utiliser quand : la hiérarchie n’est pas trop complexe et que la perf prime.
  */
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-
-@DiscriminatorColumn(name = "TYPE",length = 4)
-
-@Data @AllArgsConstructor @NoArgsConstructor
-public abstract class  BankAccount {
+@DiscriminatorColumn(name = "TYPE", length = 4)
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public abstract class BankAccount {
     @Id
     private String id;
     private double balance;
@@ -50,6 +50,6 @@ public abstract class  BankAccount {
     private AccountStatus status;
     @ManyToOne
     private Customer customer;
-    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.LAZY)//FetchType.EAGER
+    @OneToMany(mappedBy = "bankAccount", fetch = FetchType.LAZY)//FetchType.EAGER
     private List<AccountOperation> accountOperations;
 }
