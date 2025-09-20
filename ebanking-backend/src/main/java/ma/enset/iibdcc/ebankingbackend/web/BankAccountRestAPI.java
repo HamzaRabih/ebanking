@@ -1,10 +1,9 @@
 package ma.enset.iibdcc.ebankingbackend.web;
 
 import lombok.AllArgsConstructor;
-import ma.enset.iibdcc.ebankingbackend.dtos.AccountHistoryDTO;
-import ma.enset.iibdcc.ebankingbackend.dtos.AccountOperationDTO;
-import ma.enset.iibdcc.ebankingbackend.dtos.BankAccountDTO;
+import ma.enset.iibdcc.ebankingbackend.dtos.*;
 import ma.enset.iibdcc.ebankingbackend.entities.BankAccount;
+import ma.enset.iibdcc.ebankingbackend.exeptions.BalanceNotSufficientExeption;
 import ma.enset.iibdcc.ebankingbackend.exeptions.BanckAccountNoTFounExeption;
 import ma.enset.iibdcc.ebankingbackend.services.BankAccountService;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +13,7 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @CrossOrigin("*")
-public class BanckAccountRestAPI {
+public class BankAccountRestAPI {
 
     private BankAccountService bankAccountService;
 
@@ -39,4 +38,23 @@ public class BanckAccountRestAPI {
                                                @RequestParam(name = "size",defaultValue = "5")int pageSize) throws BanckAccountNoTFounExeption {
          return bankAccountService.getAccountHistory(id,page,pageSize);
     }
+
+
+    @PostMapping("/accounts/debit")
+    public DebitDTO debit(@RequestBody  DebitDTO debitDTO) throws BanckAccountNoTFounExeption, BalanceNotSufficientExeption {
+        bankAccountService.debit(debitDTO.getAccountId(),debitDTO.getAmount(),debitDTO.getDescription());
+        return debitDTO;
+    }
+
+    @PostMapping("/accounts/credit")
+    public CreditDTO debit(@RequestBody  CreditDTO creditDTO) throws BanckAccountNoTFounExeption {
+        bankAccountService.credit(creditDTO.getAccountId(),creditDTO.getAmount(),creditDTO.getDescription());
+        return creditDTO;
+    }
+    @PostMapping("/accounts/transfer")
+    public TransferRequestDTO debit(@RequestBody  TransferRequestDTO transferRequestDTO) throws BanckAccountNoTFounExeption, BalanceNotSufficientExeption {
+        bankAccountService.transfer(transferRequestDTO.getAccountSource(),transferRequestDTO.getAccountDestination(),transferRequestDTO.getAmount());
+        return transferRequestDTO;
+    }
+
 }

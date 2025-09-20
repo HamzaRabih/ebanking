@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {CustomersService} from '../../services/customers-service';
+import {CustomersService} from '../../services/customersServices/customers-service';
 import {AsyncPipe, JsonPipe, NgIf} from '@angular/common';
 import {catchError, map, Observable, throwError} from 'rxjs';
 import {Customer} from '../../models/Customer.model';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-customers',
@@ -23,7 +24,9 @@ export class Customers implements OnInit {
   searchFormGroup: FormGroup | undefined;
   errMessage!: String;
 
-  constructor(private customerService: CustomersService, private fb: FormBuilder) {
+  constructor(private customerService: CustomersService,
+              private fb: FormBuilder,
+              private router:Router) {
   }
 
   ngOnInit(): void {
@@ -52,21 +55,27 @@ export class Customers implements OnInit {
   }
 
   handelDeleteCustomer(c: Customer) {
-    this.customerService.deleteCustomer(c.id).subscribe({
-      next :(resp)=>{
-        this.customers$=this.customers$.pipe(
-          map(data=>{
-            let index=data.indexOf(c)
-            data.slice(index,1)
-            return data
-          })
-        )
-      },
-      error :err => {
-        console.log(err)
-      }
-    })
+    let conf=confirm("Are you sure ?")
+    if(!conf) return;
+      this.customerService.deleteCustomer(c.id).subscribe({
+        next :(resp)=>{
+          this.customers$=this.customers$.pipe(
+            map(data=>{
+              let index=data.indexOf(c)
+              data.slice(index,1)
+              return data
+            })
+          )
+        },
+        error :err => {
+          console.log(err)
+        }
+      })
+
   }
 
 
+  handelCustomerAccounts(c: Customer) {
+    this.router.navigateByUrl("/customer-accounts/"+c.id,{state :c})
+  }
 }

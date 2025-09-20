@@ -33,14 +33,14 @@ public class CustomerResyController {
     }
 
     @PostMapping("/customers")
-    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        return bankAccountService.saveCustmor(customerDTO);
+    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customer){
+        return bankAccountService.saveCustmor(customer);
     }
 
     @PutMapping("/customers/{id}")
-    public CustomerDTO updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customerDTO) {
-        customerDTO.setId(id);
-        return bankAccountService.updateCustmor(customerDTO);
+    public CustomerDTO updateCustomer(@PathVariable Long id, @RequestBody CustomerDTO customer) {
+        customer.setId(id);
+        return bankAccountService.updateCustmor(customer);
     }
 
     @DeleteMapping("/customers/{id}")

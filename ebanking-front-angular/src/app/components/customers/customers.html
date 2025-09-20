@@ -37,16 +37,14 @@
                   <th scope="row">{{ c.id }}</th>
                   <td>{{ c.name }}</td>
                   <td>{{ c.email }}</td>
-                  <!--              <td>-->
-                  <!--                @if (p.selected){-->
-                  <!--                  <i class="bi bi-check-circle"></i>-->
-                  <!--                } @else {-->
-                  <!--                  <i class="bi bi-circle"></i>-->
-                  <!--                }-->
-                  <!--              </td>-->
                   <td>
                     <button (click)="handelDeleteCustomer(c)" class="btn btn-danger">
                       <i class="bi bi-trash "></i>
+                    </button>
+                  </td>
+                  <td>
+                    <button (click)="handelCustomerAccounts(c)" class="btn btn-success">
+                      <i class="bi bi-card-list"></i>
                     </button>
                   </td>
                 </tr>
