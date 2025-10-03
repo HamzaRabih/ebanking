@@ -10,19 +10,32 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/accounts">Accounts</a>
+          <a class="nav-link" href="#" routerLink="/admin/accounts">Accounts</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Customers
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" routerLink="/customers">Search customers</a></li>
-            <li><a class="dropdown-item" routerLink="/new-customers">New customers</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/customers">Search customers</a></li>
+            <li><a class="dropdown-item" routerLink="/admin/new-customers">New customers</a></li>
           </ul>
         </li>
       </ul>
-
+      @if (authService.isAutenticated){
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <strong class="active">
+              {{authService.username}}
+            </strong>
+          </li>
+          <li>
+            <button class="btn btn-info " (click)="handleLogout()">
+              <i class="bx bx-power-off me-2"></i>Déconnexion
+            </button>
+          </li>
+        </ul>
+      }
     </div>
   </div>
 </nav>

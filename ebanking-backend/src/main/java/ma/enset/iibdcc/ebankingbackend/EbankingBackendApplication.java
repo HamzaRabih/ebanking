@@ -32,7 +32,7 @@ public class EbankingBackendApplication {
     }
 
     //Test couche service
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(BankAccountService bankAccountService) {
         return args -> {
             Stream.of("Souhaib","Hamza","Mohammed")
@@ -56,7 +56,7 @@ public class EbankingBackendApplication {
                     });
             List<BankAccountDTO> bankAccountList=bankAccountService.bankAccountList();
             for (BankAccountDTO account : bankAccountList) {
-                for (int i = 0; i <100 ; i++) {
+                for (int i = 0; i <10 ; i++) {
                     String accountId ;
                     if (account instanceof SavingBankAccountDTO) {
                         accountId=((SavingBankAccountDTO) account).getId();

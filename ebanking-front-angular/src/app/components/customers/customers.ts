@@ -76,6 +76,6 @@ export class Customers implements OnInit {
 
 
   handelCustomerAccounts(c: Customer) {
-    this.router.navigateByUrl("/customer-accounts/"+c.id,{state :c})
+    this.router.navigateByUrl("/admin/customer-accounts/"+c.id,{state :c})
   }
 }

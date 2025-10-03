@@ -1,0 +1,51 @@
+.spinner-wrapper {
+    background-color: #f5f5f9;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ;
+}
+
+.spinner-border{
+    height: 60px;
+    width: 60px;
+
+}
+
+.Mycolor {
+  color: #FFFFFF!important;
+}
+
+
+th::first-letter {
+  text-transform: uppercase!important;
+}
+th {
+  text-transform: lowercase!important;
+}
+
+thead,.btn-gradient {
+  background: linear-gradient(45deg, #56deff,#24a5e7, #01a3fa) !important;
+  color: #FFFFFF!important;
+}
+thead th
+{
+  color: #FFFFFF!important;
+}
+
+.select22:valid:not(:focus) {
+  border: none;
+}
+
+.select22:focus {
+  border: none;
+}
+.path-color{
+  color: #566A7F;
+}
